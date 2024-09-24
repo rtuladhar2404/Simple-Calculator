@@ -1,0 +1,45 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: calculator-ns
+  labels:
+    name: calculator-ns
+---    
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: calculator-project
+  namespace: calculator-ns
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      simple: calculator-project
+  template:
+    metadata:
+      labels:
+        simple: calculator-project
+    spec:
+      containers:
+      - name: calculator-project
+        image: rtuladhar2404/calculator-project:latest
+        ports:
+        - containerPort: 80
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: calculator-project
+  namespace: calculator-ns
+spec:
+  selector:
+    simple: calculator-project
+  ports:
+  - name: calculator-project
+    port: 80
+    targetPort: 80
+    nodePort: 32000
+  type: NodePort
