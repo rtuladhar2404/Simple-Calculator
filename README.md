@@ -25,6 +25,12 @@ Building the Docker Image
     - Pushing the image to Docker Hub
         docker push rtuladhar2404/calculator-project
 
- 
+Deploying the project in Kubernetes
+ 1. Creating the yaml file with script to create namespace, deploy section to define the type of Kubernetes resource and service    to define the service along with ports to use.
 
+ 2. Apply the yaml file with kubernetes command
+    - kubectl apply -f calculator-project.yaml
+    
+ 3. Access the application
+    - Open the browser and go to http://192.168.56.21:32000 to access the calculator running in the Kubernetes cluster.
 
